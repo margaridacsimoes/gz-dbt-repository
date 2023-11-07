@@ -4,17 +4,40 @@ sources:
   - name: raw
     database: groovy-gearbox-402208
     schema: gz_raw_data
-    descripton: greenweez raw data source 
+    description: greenweez raw data source 
     tables:
       - name: sales
         identifier: raw_gz_sales
         description: sales of greenweez/ we have a row per product_id found in each order_id
+        freshness: 
+          warn_after: 
+            count: 90
+            period: day
+        loaded_at_field: "CAST (date_date as timestamp)"
+        
         columns:
           - name: date_date
             description: the date of purchase
+          - name: "(pdt_id || '-' || orders_id)"
+            tests: 
+              - unique
+              - not_null
+              
+        
       - name: product
         identifier: raw_gz_product
         description: purchase price for each product id
+        columns:
+          - name: products_id
+            tests:
+              - unique
+              - not_null
+
       - name: ship
         identifier: raw_gz_ship
         description: shipping cost for each order
+        columns:
+          - name: orders_id
+            tests:
+              - unique
+              - not_null
