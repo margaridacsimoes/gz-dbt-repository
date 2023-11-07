@@ -1,4 +1,10 @@
-select *
+select 
+sales.date_date
+,sales.orders_id
+,sales.products_id
+,sales.revenue
+,sales.quantity
+,product.purchase_price
 
 , (quantity * purchase_price) as purchase_cost
 , (revenue - (quantity * purchase_price)) as margin
