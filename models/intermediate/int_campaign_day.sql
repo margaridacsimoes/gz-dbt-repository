@@ -1,3 +1,4 @@
+
 select 
 date_date,
 sum(ads_costs) as ads_cost,
