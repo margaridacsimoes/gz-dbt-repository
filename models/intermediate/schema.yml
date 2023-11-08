@@ -1,0 +1,10 @@
+version: 2
+
+models:
+  - name: int_campaigns
+    columns:
+     - name: "(campaign_key || '-' || paid_source || '-' || date_date)"
+       description: primary key
+       tests:
+        - unique
+        - not_null
