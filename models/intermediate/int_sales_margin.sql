@@ -8,6 +8,7 @@ sales.date_date
 
 , (quantity * purchase_price) as purchase_cost
 , (revenue - (quantity * purchase_price)) as margin
+, {{margin_percentage ('revenue', 'purchase_price')}} as percentage_margin
 
 from {{ ref ('stg_raw__sales')}} as sales
 
